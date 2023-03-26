@@ -1,0 +1,8 @@
+<div class="card mt-3" *ngFor="let comment of comments">
+  <div class="card-body">
+    <h5 class="card-title">{{ comment.email }}</h5>
+    <p class="card-text text-muted">
+      {{ comment.body }}
+    </p>
+  </div>
+</div>

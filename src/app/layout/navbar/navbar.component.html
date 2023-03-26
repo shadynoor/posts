@@ -1,0 +1,10 @@
+<ul class="nav nav-fill nav-pills mb-5">
+  <li class="nav-item me-1">
+    <a class="nav-link" routerLink="posts" routerLinkActive="active">Posts</a>
+  </li>
+  <li class="nav-item" (click)="logout()">
+    <a class="nav-link" routerLink="auth" routerLinkActive="active">
+      {{ isLogged ? "Logout" : "Authentication" }}
+    </a>
+  </li>
+</ul>
