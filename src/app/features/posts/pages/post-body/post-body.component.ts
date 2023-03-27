@@ -27,7 +27,7 @@ export class PostBodyComponent implements OnInit, OnDestroy {
         this.post = posts.slice(+id - 1, +id)[0];
 
         this.title.setTitle(this.post.title);
-        this.metaTag.updateTag({
+        this.metaTag.addTag({
           name: this.post.title,
           content: this.post.body,
         });

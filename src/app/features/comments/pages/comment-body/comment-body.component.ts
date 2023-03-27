@@ -27,6 +27,11 @@ export class CommentBodyComponent {
         this.route.params.subscribe((params: Params) => {
           const id = +params['id'];
           this.comment = comments.slice(id - 1, id)[0];
+          this.title.setTitle(this.comment.name);
+          this.metaTag.addTag({
+            name: this.comment.email,
+            content: this.comment.body,
+          });
         });
       });
   }
