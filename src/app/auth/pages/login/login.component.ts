@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user';
@@ -12,6 +13,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
+  isLogged = false;
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -22,11 +25,17 @@ export class LoginComponent {
       email: this.loginForm.controls.email.value || '',
       password: this.loginForm.controls.password.value || '',
     };
+    this.isLogged = true;
 
     this.authService.login(user);
 
-    if ('logged' in localStorage) {
-      this.router.navigate(['posts']);
+    if (isPlatformBrowser(this.authService.currPlatform)) {
+      if ('logged' in localStorage) {
+        setTimeout(() => {
+          this.isLogged = false;
+          this.router.navigate(['posts']);
+        }, 1000);
+      }
     }
   }
 }

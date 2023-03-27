@@ -1,5 +1,7 @@
 <div class="container mt-5">
-  <div class="row">
+  <app-spinner *ngIf="isReg" class="mt-5"></app-spinner>
+
+  <div class="row" *ngIf="!isReg">
     <div class="col-12">
       <form
         class="mb-3 w-50 m-auto"
@@ -45,7 +47,7 @@
       </form>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="!isReg">
     <div class="w-50 m-auto">
       Already a user? <a routerLink="/auth/login">Login Now</a>
     </div>

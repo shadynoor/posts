@@ -1,6 +1,7 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-12">
+    <app-spinner *ngIf="isLogged" class="mt-5"></app-spinner>
+    <div class="col-12" *ngIf="!isLogged">
       <form
         class="mb-3 w-50 m-auto"
         [formGroup]="loginForm"
@@ -35,7 +36,7 @@
       </form>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="!isLogged">
     <div class="w-50 m-auto">
       Not a user? <a routerLink="/auth/register">Register Now</a>
     </div>

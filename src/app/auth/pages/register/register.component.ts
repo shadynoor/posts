@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,7 +10,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
+  isReg = false;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,5 +26,12 @@ export class RegisterComponent {
       password: this.loginForm.controls.password.value || '',
     };
     this.authService.register(user);
+
+    this.isReg = true;
+
+    setTimeout(() => {
+      this.isReg = false;
+      this.router.navigate(['posts']);
+    }, 1000);
   }
 }
