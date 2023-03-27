@@ -11,12 +11,21 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import(`./auth/auth.module`).then((m) => m.AuthModule),
   },
+  {
+    path: 'comments',
+    loadChildren: () =>
+      import(`./features/comments/comments.module`).then(
+        (m) => m.CommentsModule
+      ),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

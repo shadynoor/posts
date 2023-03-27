@@ -1,3 +1,3 @@
 # Posts
 
-## Run it Using ng run task:serve-ssr
+## Run it Using ng run test:serve-ssr

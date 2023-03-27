@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { PostsService } from '../../services/posts.service';
 
 @Component({
@@ -9,11 +10,22 @@ import { PostsService } from '../../services/posts.service';
 export class PostsComponent implements OnInit {
   posts: any[] = [];
 
-  constructor(private postsService: PostsService) {}
+  constructor(
+    private postsService: PostsService,
+    private metaTag: Meta,
+    private title: Title
+  ) {}
 
   ngOnInit(): void {
     this.postsService.getPosts().subscribe((posts: any) => {
-      this.posts = posts.slice(0, 5);
+      this.posts = posts.slice(0, 10);
+      // for (let i = 0; i < this.posts.length; i++) {
+      //   this.title.setTitle(this.posts[i].title);
+      //   this.metaTag.addTag({
+      //     name: this.posts[i].title,
+      //     content: this.posts[i].body,
+      //   });
+      // }
     });
   }
   sendPost(post: any) {

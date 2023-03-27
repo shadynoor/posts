@@ -12,20 +12,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Posts');
-
-    this.metaTagService.addTags([
-      {
-        name: 'post 1',
-        content: 'post 1 body',
-      },
-      {
-        name: 'post 2',
-        content: 'post 2 body',
-      },
-      {
-        name: 'post 3',
-        content: 'post 3 body',
-      },
-    ]);
   }
 }

@@ -9,17 +9,8 @@ const routes: Routes = [
     component: PostsComponent,
     children: [
       {
-        path: 'body/:id',
+        path: ':id',
         component: PostBodyComponent,
-        children: [
-          {
-            path: 'comments',
-            loadChildren: () =>
-              import(`../comments/comments.module`).then(
-                (m) => m.CommentsModule
-              ),
-          },
-        ],
       },
     ],
   },

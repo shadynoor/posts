@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
-import { map, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PostsService } from '../../services/posts.service';
 
 @Component({
@@ -14,19 +15,27 @@ export class PostBodyComponent implements OnInit, OnDestroy {
 
   constructor(
     private postsService: PostsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private metaTag: Meta,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
-    // this.postSub = this.postsService.getPosts().subscribe((posts: any) => {
-    //   this.route.params.subscribe((params: Params) => {
-    //     const id = params['id'];
-    //     this.post = posts.slice(id, id + 1)[0];
-    //   });
-    // });
-    this.postSub = this.postsService.post.subscribe((post) => {
-      this.post = post;
+    this.postSub = this.postsService.getPosts().subscribe((posts: any) => {
+      this.route.params.subscribe((params: Params) => {
+        const id = params['id'];
+        this.post = posts.slice(+id - 1, +id)[0];
+
+        this.title.setTitle(this.post.title);
+        this.metaTag.updateTag({
+          name: this.post.title,
+          content: this.post.body,
+        });
+      });
     });
+    // this.postSub = this.postsService.post.subscribe((post) => {
+    //   this.post = post;
+    // });
   }
 
   ngOnDestroy(): void {
